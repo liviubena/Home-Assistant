@@ -1,0 +1,272 @@
+####################################################
+#                   Liviu  Home                    #
+####################################################
+
+- id: liviu_home
+  alias: Liviu e acasa - Notification
+  trigger:
+     platform: state
+     entity_id: device_tracker.liviu_nubia_z17
+     from: 'not_home'
+     to: 'home'
+  action:
+   - service: notify.all_tv
+     data:
+        message: "Liviu a ajuns acasa {{ states('sensor.time') }}"
+        data:
+            duration: 8
+            color: "green"
+   - service: notify.all_phones
+     data:
+        message: "Liviu a ajuns acasa {{ states('sensor.time') }}"            
+
+####################################################
+#                   Carmen  Home                   #
+####################################################
+
+- id: carmen_home
+  alias: Carmen e acasa - Notification
+  trigger:
+     platform: state
+     entity_id: device_tracker.iphone__carmen
+     from: 'not_home'
+     to: 'home'
+  action:
+   - service: notify.all_tv
+     data:
+        message: "Carmen a ajuns acasa {{ states('sensor.time') }}"
+        data:
+            duration: 8
+            color: "green"        
+   - service: notify.all_phones
+     data:
+        message: "Carmen a ajuns acasa {{ states('sensor.time') }}"
+
+############################################################
+#
+# Alarma la senzori miscare sau usa bucatarie 
+#
+############################################################
+- id: alarm_motion_sensor
+  trigger: 
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d0002236e0e
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d000224f598
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0001f38fcf
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.alarm_set
+    state: 'on'
+  action:
+    - service: notify.all_phones
+      data:
+        message: "Alarma, alarma, au intrat hotii in casa {{ states('sensor.time') }}"
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        gw_mac: !secret aqara_mac
+        ringtone_id: 1
+        ringtone_vol: 30
+
+
+############################################################
+#
+# Set Day Mode Theme on Start
+#
+############################################################
+- id: day_theme_startup
+  alias: 'Set Day theme at startup'
+  initial_state: 'on'
+  trigger:
+    - platform: homeassistant
+      event: start
+  condition:
+    condition: sun
+    after: sunrise
+    after_offset: '+00:30:00'
+  action:
+    - service: frontend.set_theme
+      data:
+        name: default
+  
+############################################################
+#
+# Set Night Mode Theme on Start
+#
+############################################################
+- id: night_theme_startup    
+  alias: 'Set Night theme at startup'
+  initial_state: 'on'
+  trigger:
+    - platform: homeassistant
+      event: start
+  condition:
+    condition: sun
+    after: sunset
+  action:
+    - service: frontend.set_theme
+      data:
+        name: darkblue
+
+############################################################
+#
+# Set Day Mode Theme
+#
+############################################################
+- id: day_theme_sunrise
+  alias: Set Day Mode Theme after Sunrise
+  trigger:
+    - platform: sun
+      event: sunrise
+      offset: '+00:30:00'
+  action:
+    - service: frontend.set_theme
+      data:
+        name: default
+
+############################################################
+#
+# Set Night Mode Theme
+#
+############################################################
+- id: night_theme_sunset
+  alias: Set Night Mode Theme after Sunset
+  trigger:
+    - platform: sun
+      event: sunset
+  action:
+    - service: frontend.set_theme
+      data:
+        name: darkblue
+
+
+############################################################
+#
+# Aprindere lumina gateway dupa apus
+#
+############################################################
+- id: aqara_gateway_light_on
+  trigger:
+    - platform: sun
+      event: sunset
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.gateway_light_7811dcb224b3
+        rgb_color: [0, 255, 127]
+        brightness: 100
+
+############################################################
+#
+# Stingere lumina gateway dupa rasarit
+#
+############################################################
+- id: aqara_gateway_light_off
+  trigger:
+    - platform: sun
+      event: sunrise
+      offset: '+00:30:00'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.gateway_light_7811dcb224b3
+
+
+####################################################
+#                   NSA310 OFF                     #
+####################################################
+
+- id: nsa310_off
+  alias: NSA310 este oprit
+  trigger:
+    platform: state
+    entity_id: switch.nsa310
+    from: 'on'
+    to: 'off'
+  condition:
+    condition: or
+    conditions:
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - sat
+          - sun
+      - condition: time
+        before: '02:58:00'
+        weekday:
+          - fri
+      - condition: time
+        after: '04:02:00'
+        weekday:
+          - fri          
+  action:
+    - service: notify.ios_iphone__liviu
+      data:
+        message: "NSA310 s-a oprit {{ states('sensor.time') }}"
+    - service: notify.all_tv
+      data:
+        message: "NSA310 s-a oprit {{ states('sensor.time') }}"
+    - service: tts.google_say
+      entity_id: media_player.living_room_speaker
+      data:
+        message: "NSA310 s-a oprit"
+
+####################################################
+#                   NVR OFF                        #
+####################################################
+
+- id: nvr_off
+  alias: NVR este oprit
+  trigger:
+    platform: state
+    entity_id: switch.nvr
+    from: 'on'
+    to: 'off'
+  action:
+    - service: notify.ios_iphone__liviu
+      data:
+        message: "NVR s-a oprit {{ states('sensor.time') }}"
+    - service: notify.all_tv
+      data:
+        message: "NVR s-a oprit {{ states('sensor.time') }}"        
+    - service: tts.google_say
+      entity_id: media_player.living_room_speaker
+      data:
+        message: "NVR s-a oprit"
+
+####################################################
+#                   Ding-Dong                      #
+####################################################
+
+- id: aqara_ding_dong
+  alias: Aqara ding-dong
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d0001f38fcf
+    from: 'off'
+    to: 'on'  
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        after: '09:00:00'
+        before: '21:00:00'
+      - condition: state
+        entity_id: input_boolean.alarm_set
+        state: 'off'        
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        gw_mac: !secret aqara_mac
+        ringtone_id: 10
+        ringtone_vol: 8         
+    - service: notify.all_tv
+      data:
+        message: "Usa la bucatarie deschisa"

@@ -1,0 +1,60 @@
+  - platform: wake_on_lan
+    mac_address: !secret wol_pc_liviu_mac
+    name: pc_liviu
+    host: 192.168.1.3
+    broadcast_address: 192.168.1.255
+    turn_off:
+        service: hassio.addon_stdin
+        data:
+            addon: core_rpc_shutdown
+            input: pc_liviu    
+
+  - platform: wake_on_lan
+    mac_address: !secret wol_nsa310_mac
+    name: NSA310
+    host: 192.168.1.5
+    broadcast_address: 192.168.1.255
+
+  - platform: wake_on_lan
+    mac_address: !secret wol_nvr_mac
+    name: NVR
+    host: 192.168.1.4
+    broadcast_address: 192.168.1.255
+
+  - platform: broadlink
+    host: 192.168.1.30
+    mac: !secret broadlink_sp3_1_mac
+    type: sp3
+    friendly_name: Priza SP3
+    
+  - platform: broadlink
+    host: 192.168.1.33
+    mac: !secret broadlink_rm_pro_mac
+    timeout: 30
+    friendly_name: "Broadlink RM Pro"
+    type: rm2_pro_plus
+    switches:
+        living_light_1:          
+          friendly_name: "Lumina Living"
+          command_on: '6QpCAN8JCRYJFhYJFgkWCRYJCRYJFhYJFgkJFgkWFgkWCRYJFgkJFhYJFgkWCQkWCRYWCQkWFgkJFhYJFgkWCRYJFgkJFg=='
+          command_off: '6QpCAN8JFgkWCRYJFgkWCRYJFgkWCQkWFgkJFhYJCRYWCQkWCRYJFhYJFgkWCQkWCRYWCQkWFgkWCRYJCRYWCRYJFgkJFg=='
+        living_light_2:          
+          friendly_name: "Calculator Living"
+          command_on: '6QpCAN8JCRYJFgkWCRYJFgkWCRYWCQkWCRYJFhYJCRYWCRYJCRYJFgkWFgkWCQkWFgkJFgkWCRYJFhYJCRYWCQkWCRYJFg=='
+          command_off: '6QpCAN8JCRYWCRYJCRYJFhYJCRYJFhYJCRYWCQkWCRYJFgkWFgkWCRYJCRYWCQkWCRYJFgkWCRYWCRYJCRYWCRYJCRYWCQ=='
+        bedroom_light:          
+          friendly_name: "Lumina Dormitor"
+          command_on: '6QpCAN8JFgkWCRYJFgkWCQkWFgkWCRYJCRYJFgkWCRYJFgkWCRYJFhYJFgkWCRYJCRYWCRYJCRYWCRYJFgkWCRYJCRYWCQ=='
+          command_off: '6QpCAN8JFgkJFgkWFgkJFgkWCRYJFhYJFgkJFhYJFgkWCRYJCRYWCRYJCRYWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkJFg=='
+        aer_conditionat:          
+          friendly_name: "Aer Conditionat Living"
+          command_on: 'JgBoAAABJ5UWNRY0Fw8XEBcPFw8XDxc1FhAWNRY0FxAXDxcPFw8XEBc0FjQXNBcQFw8XDxcPFxAWEBY1FhAWERYQFjQXNBcQFhAWEBYQFhEWEBYQFhAWERYQFhAWEBYRFhAWEBYQFg8XAA0F'
+          command_off: 'JgBoAAABJ5UWNRY0Fw8XEBcPFw8XDxc1FhAWNRY0FxAXDxcPFw8XEBc0FjQXNBcQFw8XDxcPFxAWEBY1FhAWERYQFjQXNBcQFhAWEBYQFhEWEBYQFhAWERYQFhAWEBYRFhAWEBYQFg8XAA0F'
+        guestroom_light:
+          friendly_name: "Lumina Camera Oaspeti"
+          command_on: '6RRGAN8JCRYJFhYJFgkJFgkWCRYJFhYJFgkJFhYJFgkWCRYJCRYWCQkWCRYWCRYJFgkWCQkWCRYJFgkWCRYJFgkWCRYJFgkAAUg='
+          command_off: '6RRGAN8JFgkJFhYJFgkWCRYJFgkJFhYJFgkWCRYJFgkJFhYJFgkJFhYJCRYWCQkWFgkWCQkWCRYWCRYJCRYJFgkWFgkWCQkAAUg='
+        studyroom_light:
+          friendly_name: "Lumina Camera Studiu"
+          command_on: '6RRGAN8JFgkJFgkWCRYWCRYJCRYJFhYJFgkWCRYJFgkJFhYJCRYJFhYJCRYJFhYJFgkJFhYJCRYWCQkWCRYJFgkWFgkJFgkAAUg='
+          command_off: '6RRGAN8JCRYJFgkWCRYWCQkWCRYWCQkWCRYJFhYJFgkJFhYJCRYWCRYJCRYWCRYJCRYJFgkWFgkWCQkWCRYJFgkWCRYJFgkAAUg='

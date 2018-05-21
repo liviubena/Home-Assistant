@@ -1,0 +1,124 @@
+# Turn on Sony TV
+sony_tv_start:
+  sequence:
+    - service: media_player.turn_on
+      data:
+          entity_id: media_player.sony_bravia_tv
+    - delay: 00:00:05
+    - service: notify.sony_bravia_tv
+      data:
+        message: "Gata boss, am pornit televizorul"
+        data:
+            duration: 8
+            color: "green"
+
+# Turn off Sony TV
+sony_tv_stop:
+  sequence:
+    - service: notify.sony_bravia_tv
+      data:
+        message: "Gata boss, opresc jucaria"
+        data:
+            duration: 2
+            color: "green"  
+    - delay: 00:00:02
+    - service: media_player.turn_off
+      data:
+          entity_id: media_player.sony_bravia_tv
+
+
+# Change Sony TV to PRO TV
+sony_tv_pro_tv:
+  sequence:
+    - service: media_player.select_source
+      data:
+          entity_id: media_player.sony_bravia_tv
+          source: "PRO TV HD"
+    - service: notify.all_tv
+      data:
+        message: "Am schimbat pe PRO TV"
+        data:
+            duration: 8
+            color: "green"
+
+# Change Sony TV to HBO
+sony_tv_hbo:
+  sequence:
+    - service: media_player.select_source
+      data:
+          entity_id: media_player.sony_bravia_tv
+          source: "HBO"
+    - service: notify.all_tv
+      data:
+        message: "Am schimbat pe HBO"
+        data:
+            duration: 8
+            color: "green"
+
+# Change Sony TV to Digi 24
+sony_tv_digi24:
+  sequence:
+    - service: media_player.select_source
+      data:
+          entity_id: media_player.sony_bravia_tv
+          source: "Digi24"
+    - service: notify.all_tv
+      data:
+        message: "Am schimbat pe Digi 24"
+        data:
+            duration: 8
+            color: "green"
+
+# Change Sony TV to Realitatea TV
+sony_tv_realitatea:
+  sequence:
+    - service: media_player.select_source
+      data:
+          entity_id: media_player.sony_bravia_tv
+          source: "Realitatea TV"
+    - service: notify.all_tv
+      data:
+        message: "Am schimbat pe Realitatea TV"
+        data:
+            duration: 8
+            color: "green"
+
+# Good night
+good_night:
+  sequence:
+    - service: media_player.turn_off
+      data:
+          entity_id: media_player.sony_bravia_tv
+    - service: switch.turn_off
+      data:
+        entity_id: switch.lumina_living
+    - service: switch.turn_off
+      data:
+        entity_id: switch.calculator_living
+
+lights_on:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.lumina_living
+    - service: switch.turn_on
+      data:
+        entity_id: switch.calculator_living
+
+lights_off:
+  sequence:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.lumina_living
+    - service: switch.turn_off
+      data:
+        entity_id: switch.calculator_living
+
+movie_time:
+  sequence:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.lumina_living
+    - service: switch.turn_on
+      data:
+        entity_id: switch.calculator_living

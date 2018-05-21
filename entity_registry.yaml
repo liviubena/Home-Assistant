@@ -1,0 +1,104 @@
+binary_sensor.motion_sensor_158d0002236e0e:
+  name:
+  platform: xiaomi_aqara
+  unique_id: status158d0002236e0e
+binary_sensor.door_window_sensor_158d0001f38fcf:
+  name:
+  platform: xiaomi_aqara
+  unique_id: status158d0001f38fcf
+binary_sensor.motion_sensor_158d000224f598:
+  name:
+  platform: xiaomi_aqara
+  unique_id: status158d000224f598
+binary_sensor.switch_158d00019cd284:
+  name:
+  platform: xiaomi_aqara
+  unique_id: status158d00019cd284
+light.gateway_light_7811dcb224b3:
+  name:
+  platform: xiaomi_aqara
+  unique_id: rgb7811dcb224b3
+sensor.pressure_158d0001f50b78:
+  name:
+  platform: xiaomi_aqara
+  unique_id: pressure158d0001f50b78
+sensor.illumination_158d000224f598:
+  name:
+  platform: xiaomi_aqara
+  unique_id: lux158d000224f598
+sensor.temperature_158d000201b181:
+  name:
+  platform: xiaomi_aqara
+  unique_id: temperature158d000201b181
+sensor.illumination_158d0002236e0e:
+  name:
+  platform: xiaomi_aqara
+  unique_id: lux158d0002236e0e
+sensor.humidity_158d000201b181:
+  name:
+  platform: xiaomi_aqara
+  unique_id: humidity158d000201b181
+sensor.temperature_158d0001f50b78:
+  name:
+  platform: xiaomi_aqara
+  unique_id: temperature158d0001f50b78
+sensor.pressure_158d000201b181:
+  name:
+  platform: xiaomi_aqara
+  unique_id: pressure158d000201b181
+sensor.humidity_158d0001f50b78:
+  name:
+  platform: xiaomi_aqara
+  unique_id: humidity158d0001f50b78
+sensor.illumination_7811dcb224b3:
+  name:
+  platform: xiaomi_aqara
+  unique_id: illumination7811dcb224b3
+sensor.iphone__carmen_battery_state:
+  name:
+  platform: ios
+  unique_id: state_iphone__carmen
+sensor.iphone__liviu_battery_level:
+  name:
+  platform: ios
+  unique_id: level_iphone__liviu
+sensor.iphone__liviu_battery_state:
+  name:
+  platform: ios
+  unique_id: state_iphone__liviu
+sensor.liviu_benas_ipad2_battery_level:
+  name:
+  platform: ios
+  unique_id: level_liviu_benas_ipad2
+sensor.iphone__carmen_battery_level:
+  name:
+  platform: ios
+  unique_id: level_iphone__carmen
+sensor.liviu_benas_ipad2_battery_state:
+  name:
+  platform: ios
+  unique_id: state_liviu_benas_ipad2
+media_player.sony_tv:
+  name:
+  platform: cast
+  unique_id: 60f15f76-ac34-9fde-e296-67c4b80e7ee0
+media_player.living_speaker:
+  name:
+  platform: cast
+  unique_id: b3853f60-8ff8-e93b-e142-f3fc24b7a097
+media_player.kitchen_tv:
+  name:
+  platform: cast
+  unique_id: 38b03ec3-1808-dabd-9620-9b7e52b00506
+media_player.kitchen_speaker:
+  name:
+  platform: cast
+  unique_id: 010d9418-4b53-1dcd-8824-9cbeb7ace786
+media_player.bedroom_speaker:
+  name:
+  platform: cast
+  unique_id: afb63ae3-9ec2-318e-435a-de1641e5d08e
+media_player.home_group:
+  name:
+  platform: cast
+  unique_id: b890b2c5-1c94-4f04-bbc4-cd115caccb0a
